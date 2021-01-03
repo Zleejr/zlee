@@ -256,6 +256,317 @@ async function starts() {
                 case 'cekpremium':
                 if (!isPremium) return reply('kamu Belum Terdaftar sebagai User Premium')
                 reply('kamu udah ke daftar sebagai user Premium')
+                     break
+                case 'persengay':
+					gatauda = body.slice(7)
+					anu = await fetchJson(`https://arugaz.herokuapp.com/api/howbucins`, {method: 'get'})
+					reply(anu.desc+anu.persen)
+					break
+				case 'walpaperhd':
+					if (args.length < 1) return reply('teks nya mana om')
+					teks = body.slice(7)
+					reply(mess.wait)
+					anu = await fetchJson(`https://api.vhtear.com/walpaper?query=${teks}&apikey=ANTIGRATISNIHANJENKKK`)
+					buff = await getBuffer(anu.result.LinkImg)
+					client.sendMessage(from, buff, image, {quoted: mek})
+					break
+				case 'donasi':
+				case 'donate':
+					client.sendMessage(from, 'Mau donasi ya om?✨\n\n اتَّقوا النَّارَ ولو بشقِّ تمرةٍ ، فمن لم يجِدْ فبكلمةٍ طيِّبةٍ\n_“jauhilah api neraka, walau hanya dengan bersedekah sebiji kurma (sedikit). Jika kamu tidak punya, maka bisa dengan kalimah thayyibah” [HR. Bukhari 6539, Muslim 1016]_\n\n*Pulsa AXIS :* _0838-3899-3000_\n*Dana/ovo :* _0838-3899-3000_\n :*  text, { quoted: mek })
+					break
+				case 'randomanime':
+				    try {
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/randomanime`, {method: 'get'})
+						buffer = await getBuffer(res.result)
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'ni randomanime!'})
+					} catch (e) {
+						console.log(`Error :`, color(e,'red'))
+						reply('❌ *ERROR* ❌')
+					}
+					break
+			    case 'randomhentai':
+				    try {
+						if (!isNsfw) return reply('❌ *FALSE* ❌')
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/hentai`, {method: 'get'})
+						buffer = await getBuffer(res.result)
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'hentai teros'})
+					} catch (e) {
+						console.log(`Error :`, color(e,'red'))
+						reply('❌ *ERROR* ❌')
+					}
+					break
+				case 'nsfwloli':
+				    try {
+						if (!isNsfw) return reply('❌ *FALSE* ❌')
+						res = await fetchJson(`https://api.lolis.life/random?nsfw=true`, {method: 'get'})
+						buffer = await getBuffer(res.url)
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
+					} catch (e) {
+						console.log(`Error :`, color(e,'red'))
+						reply('❌ *ERROR* ❌')
+					}
+					break
+			    case 'nsfwblowjob':
+				    try {
+						if (!isNsfw) return reply('❌ *FALSE* ❌')
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/nsfwblowjob`, {method: 'get'})
+						buffer = await getBuffer(res.result)
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
+					} catch (e) {
+						console.log(`Error :`, color(e,'red'))
+						reply('❌ *ERROR* ❌')
+					}
+					break
+				case 'bucin':
+					gatauda = body.slice(7)
+					anu = await fetchJson(`https://arugaz.herokuapp.com/api/howbucins`, {method: 'get'})
+					reply(anu.desc)
+					break
+		        case 'persengay':
+					gatauda = body.slice(7)
+					anu = await fetchJson(`https://arugaz.herokuapp.com/api/howbucins`, {method: 'get'})
+					reply(anu.desc+anu.persen)
+					break	
+				case 'quotes':
+					gatauda = body.slice(8)
+					anu = await fetchJson(`https://arugaz.herokuapp.com/api/randomquotes`, {method: 'get'})
+					reply(anu.quotes)
+					break		
+			    case 'nsfwneko':
+				    try {
+						if (!isNsfw) return reply('❌ *FALSE* ❌')
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/nsfwneko`, {method: 'get'})
+						buffer = await getBuffer(res.result)
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'ni anjim'})
+					} catch (e) {
+						console.log(`Error :`, color(e,'red'))
+						reply('❌ *ERROR* ❌')
+					}
+					break
+				case 'nsfwtrap':
+				    try {
+						if (!isNsfw) return reply('❌ *FALSE* ❌')
+						res = await fetchJson(`https://tobz-api.herokuapp.com/api/nsfwtrap`, {method: 'get'})
+						buffer = await getBuffer(res.result)
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'ni anjim'})
+					} catch (e) {
+						console.log(`Error :`, color(e,'red'))
+						reply('❌ *ERROR* ❌')
+					}
+					break
+				 case 'speed':
+                    const timestamp = speed();
+                    const latensi = speed() - timestamp
+                    client.sendMessage(from, `Speed: ${latensi.toFixed(4)} _Second_`, text, { quoted: mek})
+                    break
+                case 'tagme':
+					var nom = mek.participant
+					const tag = {
+					text: `@${nom.split("@s.whatsapp.net")[0]} tagged!`,
+					contextInfo: { mentionedJid: [nom] }
+					}
+					client.sendMessage(from, tag, text, {quoted: mek})
+					break
+                case 'delete':
+					if (!isGroup) return reply(mess.only.group)
+					if (!isGroupAdmins) return reply(mess.only.admin)
+					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+					if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Tag target yang ingin di jadi admin!')
+					mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+					if (mentioned.length > 1) {
+						teks = 'Perintah di terima, hapus pesan :\n'
+						for (let _ of mentioned) {
+							teks += `@${_.split('@')[0]}\n`
+						}
+						mentions(teks, mentioned, true)
+						client.deleteMessage(from, mentioned)
+					} else {
+						mentions(`Perintah di terima, hapus pesan : @${mentioned[0].split('@')[0]}`, mentioned, true)
+						client.deleteMessage(from, mentioned)
+					}
+					break
+                case 'fakereplay':
+                   client.reply(from, 'ange mas', 'mending lari', "0823-877101916")
+                   break
+                case 'but':
+                    client.reply(from, 'asw', Message.Type.text)
+                    break
+				case 'infogc':
+				client.updatePresence(from, Presence.composing)
+				if (!isGroup) return reply(mess.only.group)
+					try {
+					ppimg = await client.getProfilePicture(from)
+				} catch {
+					ppimg = 'https://i.ibb.co/NthF8ds/IMG-20201223-WA0740.jpg'
+				}
+					let buf = await getBuffer(ppimg)
+					teks = (args.length > 1) ? body.slice(8).trim() : ''
+					teks += `*Nama grup :* ${groupName}\n*Deskripsi :* ${groupDesc}\n*Jumlah Admin :* ${groupAdmins.length}\n*Jumlah Member :* ${groupMembers.length}`
+					no = 0
+					for (let admon of groupAdmins) {
+						no += 1
+						teks += `[${no.toString()}]`
+					}
+					client.sendMessage(from, buf, image, {quoted: mek, caption: teks})
+					break
+				case 'groupinfo':
+                client.updatePresence(from, Presence.composing)
+                if (!isGroup) return reply(mess.only.group)
+                ppUrl = await client.getProfilePicture(from) // leave empty to get your own
+			    buffer = await getBuffer(ppUrl)
+		        client.sendMessage(from, buffer, image, {quoted: mek, caption: `*NAME* : ${groupName}\n*MEMBER* : ${groupMembers.length}\n*ADMIN* : ${groupAdmins.length}\n*DESK* : ${groupDesc}`})
+                break
+                breakcase 'testing':
+					var gh = body.slice(9)
+					coli1 = gh.split("|")[0];
+					coli2 = gh.split("|")[1];
+					if (args.length < 1) return reply('Teks nya mana?')
+					reply(mess.wait)
+					buffer = await getBuffer(`https://zeksapi.herokuapp.com/api/watercolour?text1=${coli1}&text2=${coli2}&apikey=xptnbot352`)
+					client.sendMessage(from, buffer, image, {quoted: mek})
+					break
+				case 'testing2':
+					var gh = body.slice(9)
+					coli1 = gh.split("|")[0];
+					coli2 = gh.split("|")[1];
+					if (args.length < 1) return reply('Teks nya mana?')
+					reply(mess.wait)
+					party = await getBuffer(`https://api.vhtear.com/partytext?text=${coli1}&text2=${coli2}&apikey=ANTIGRATISNIHANJENKKK`)
+					client.sendMessage(from, party, image, {quoted: mek})
+					break
+                case 'ninjalogo':
+                      if (args.length < 1) return reply('Teks nya mana?')
+                      gh = body.slice(11)
+                      gl1 = gh.split("|")[0];
+                      gl2 = gh.split("|")[1];
+                      reply(mess.wait)
+                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=ninjalogo&text1=${gl1}&text2=${gl2}`, {method: 'get'})
+                      buff = await getBuffer(anu.result)
+                      client.sendMessage(from, buff, image, {quoted: mek})
+                      break
+                case 'glitch':
+					var gh = body.slice(8)
+					var tels3 = gh.split("|")[0];
+					var tels4 = gh.split("|")[1];
+					if (args.length < 1) return reply(mess.blank)
+					reply(mess.wait)
+					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=glitch&text1=${tels3}&text2=${tels4}`, {method: 'get'})
+					buffer = await getBuffer(anu.result)
+					client.sendMessage(from, buffer, image, {quoted: mek})
+					break
+				case 'party':
+					if (args.length < 1) return reply(mess.blank)
+					part = body.slice(7)
+					if (part.length > 20) return reply('Teksnya kepanjangan, maksimal 20 karakter')
+					reply(mess.wait)
+					buffer = await getBuffer(`https://api.vhtear.com/partytext?text=${part}&apikey=ANTIGRATISNIHANJENKKK`)
+					client.sendMessage(from, buffer, image, {caption: 'Nih kak', quoted: mek})
+					break
+				case 'rtext':
+					if (args.length < 1) return reply(mess.blank)
+					tels5 = body.slice(7)
+					if (tels5.length > 10) return reply('Teksnya kepanjangan, maksimal 10 karakter')
+					reply(mess.wait)
+					buffer = await getBuffer(`https://api.vhtear.com/romancetext?text=${tels5}&apikey=ANTIGRATISNIHANJENKKK`)
+					client.sendMessage(from, buffer, image, {quoted: mek, caption: tels5})
+					break
+				case 'water':
+					if (args.length < 1) return reply(mess.blank)
+					tels = body.slice(7)
+					if (tels.length > 15) return reply('Teksnya kepanjangan, maksimal 20 karakter')
+					reply(mess.wait)
+					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/tfire?text=${tels}&apikey=xptnbot352`, {method: 'get'})
+					buffer = await getBuffer(anu.result)
+					client.sendMessage(from, buffer, image, {quoted: mek})
+					break
+				case 'firetext':
+					if (args.length < 1) return reply(mess.blank)
+					tels = body.slice(7)
+					if (tels.ength > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
+					reply(mess.wait)
+					anu = await fetchJson(`https://zeksapi.herokuapp.com/api/tlight?text=${tels}&apikey=xptnbot352`, {method: 'get'})
+					buff = await getBuffer(anu.result)
+					client.sendMessage(from, buff, image, {quoted: mek})
+					break
+				case 'textdark':
+					if (args.length < 1) return reply(mess.blank)
+					tels = body.slice(9)
+					if (tels.ength > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
+					reply(mess.wait)
+					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=metal_dark_gold&text=${tels}&apiKey=administrator`, {method: 'get'})
+					buff = await getBuffer(anu.result)
+					client.sendMessage(from, buff, image, {quoted: mek})
+					break
+				case 'textblue':
+					if (args.length < 1) return reply(mess.blank)
+					tels = body.slice(9)
+					if (tels.ength > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
+					reply(mess.wait)
+					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=blue_metal&text=${tels}&apiKey=administrator`, {method: 'get'})
+					buff = await getBuffer(anu.result)
+					client.sendMessage(from, buff, image, {quoted: mek})
+					break
+				case 'textsky':
+					if (args.length < 1) return reply(mess.blank)
+					tels = body.slice(9)
+					if (tels.ength > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
+					reply(mess.wait)
+					anu = await fetchJson(`https://hujanapi.herokuapp.com/api/sky_online?text=${tels}&apiKey=freetrial`, {method: 'get'})
+					buff = await getBuffer(anu.result.result)
+					client.sendMessage(from, buff, image, {quoted: mek})
+					break
+				case 'texteng':
+					if (args.length < 1) return reply(mess.blank)
+					tels = body.slice(9)
+					if (tels.ength > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
+					reply(mess.wait)
+					anu = await fetchJson(`http://melodicxt.herokuapp.com/api/txtcustom?theme=sand_engraved&text=${tels}&apiKey=administrator`, {method: 'get'})
+					buff = await getBuffer(anu.result)
+					client.sendMessage(from, buff, image, {quoted: mek})
+					break
+                case 'wolflogo':
+                      if (args.length < 1) return reply('Teks nya mana?')
+                      gh = body.slice(9)
+                      gl1 = gh.split("|")[0];
+                      gl2 = gh.split("|")[1];
+                      reply(mess.wait)
+                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=wolflogo1&text1=${gl1}&text2=${gl2}`, {method: 'get'})
+                      buff = await getBuffer(anu.result)
+                      client.sendMessage(from, buff, image, {quoted: mek})
+                      break
+                case 'lionlogo':
+                      if (args.length < 1) return reply('Teks nya mana?')
+                      gh = body.slice(9)
+                      gl1 = gh.split("|")[0];
+                      gl2 = gh.split("|")[1];
+                      reply(mess.wait)
+                      anu = await fetchJson(`https://tobz-api.herokuapp.com/api/textpro?theme=lionlogo&text1=${gl1}&text2=${gl2}`, {method: 'get'})
+                      buff = await getBuffer(anu.result)
+                      client.sendMessage(from, buff, image, {quoted: mek})
+                      break
+				case 'leave': 
+				    if (!isGroup) return reply(mess.only.group)
+					if (!isOwner) return reply(mess.only.ownerB)
+			    	anu = await client.groupLeave(from, '𝗕𝘆𝗲𝗲', groupId)
+	                break
+	            case 'getses':
+                    if (!isOwner) return client.reply(from, 'Perintah ini hanya untuk Owner bot', id)
+                    const sesPic = await client.getSnapshot()
+                    client.sendFile(from, sesPic, 'session.png', 'Neh...', id)
+                    break
+				case 'setname':
+                if (!isGroup) return reply(mess.only.group)
+			    if (!isGroupAdmins) return reply(mess.only.admin)
+				if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+                client.groupUpdateSubject(from, `${body.slice(9)}`)
+                client.sendMessage(from, 'Succes, Ganti Nama Grup', text, {quoted: mek})
+                break
+                case 'setdesc':
+                if (!isGroup) return reply(mess.only.group)
+			    if (!isGroupAdmins) return reply(mess.only.admin)
+				if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+                client.groupUpdateDescription(from, `${body.slice(9)}`)
+                client.sendMessage(from, 'Succes, Ganti Deskripsi Grup', text, {quoted: mek})
                 break
                 case 'bahasa':
                 client.updatePresence(from, Presence.composing)  
@@ -928,13 +1239,15 @@ async function starts() {
 			   break
                case 'apakah':
                client.updatePresence(from, Presence.composing) 
-               random = apakah[Math.floor(Math.random() * (apakah.length))]  	
+               random = apakah[Math.floor(Math.random() * (apakah.length))]
+  	
 			   hasil = `Pertanyaan : *${body.slice(1)}*\n\nJawaban : *${random}*`
 			   reply(hasil)
 			   break
               case 'bisakah':
                 client.updatePresence(from, Presence.composing) 
-                random = bisakah[Math.floor(Math.random() * (bisakah.length))]  	
+                random = bisakah[Math.floor(Math.random() * (bisakah.length))]
+  	
 			   hasil = `Pertanyaan : *${body.slice(1)}*\n\nJawaban : *${random}*`
 			   reply(hasil)
 			   break
@@ -946,7 +1259,8 @@ async function starts() {
                 break
                case 'kapankah':
                client.updatePresence(from, Presence.composing) 
-               random = kapankah[Math.floor(Math.random() * (kapankah.length))]  	
+               random = kapankah[Math.floor(Math.random() * (kapankah.length))]
+  	
                random2 = `${Math.floor(Math.random() * 8)}`
                hasil = `Pertanyaan : *${body.slice(1)}*\n\nJawaban : *${random2} ${random}*`
               reply(hasil)
