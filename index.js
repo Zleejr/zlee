@@ -28,9 +28,9 @@ const speed = require('performance-now')
 prefix = '-'
 const vcard = 'BEGIN:VCARD\n' // metadata of the contact card
             + 'VERSION:3.0\n' 
-            + 'FN:+62 812-1519-9447\n' // full name
-            + 'ORG:Owner Caliph Bot;\n' // the organization of the contact
-            + 'TEL;type=CELL;type=VOICE;waid=6281215199447:+62 812-1519-9447\n' // WhatsApp ID + phone number
+            + 'FN:ÝHUI\n' // full name
+            + 'ORG:Owner YHUI Bot;\n' // the organization of the contact
+            + 'TEL;type=CELL;type=VOICE;waid=6283838993000:+62 838-3899-3000\n' // WhatsApp ID + phone number
             + 'END:VCARD'
 blocked = ['6282331668856@s.whatsapp.net']
 
@@ -204,7 +204,7 @@ async function starts() {
     const bisakah = ['Bisa','Tidak Bisa']
     const kapankah = ['Hari Lagi','Minggu Lagi','Bulan Lagi','Tahun Lagi']
 			const botNumber = client.user.jid
-			const nomorOwner = '6281215199447@s.whatsapp.net'
+			const nomorOwner = '6283838993000@s.whatsapp.net'
 			const premium = [nomorOwner]
 			const totalchat = await client.chats.all()
 			const ownerNumber = [nomorOwner] // replace this with your number
@@ -257,11 +257,6 @@ async function starts() {
                 if (!isPremium) return reply('kamu Belum Terdaftar sebagai User Premium')
                 reply('kamu udah ke daftar sebagai user Premium')
                      break
-                case 'persengay':
-					gatauda = body.slice(7)
-					anu = await fetchJson(`https://arugaz.herokuapp.com/api/howbucins`, {method: 'get'})
-					reply(anu.desc+anu.persen)
-					break
 				case 'walpaperhd':
 					if (args.length < 1) return reply('teks nya mana om')
 					teks = body.slice(7)
